@@ -14,7 +14,7 @@ import {
   Grid,
   Stack,
 } from "@mui/material";
-
+import { API_BASE_URL } from "../config/api";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
@@ -33,6 +33,8 @@ function ManageSpeakers() {
   const [open, setOpen] = useState(false);
 
   const [editingId, setEditingId] = useState(null);
+
+  const SERVER_URL = API_BASE_URL.replace("/api", "");
 
   const [form, setForm] = useState({
     name: "",
@@ -381,7 +383,7 @@ function ManageSpeakers() {
                 >
 
                   <img
-                    src={`http://localhost:5000${form.image}`}
+                    src={`${SERVER_URL}${form.image}`}
                     alt="Speaker"
                     style={{
                       width: 160,

@@ -15,6 +15,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { getSpeakers } from "../services/speakerService";
+import { API_BASE_URL } from "../config/api";
+
 
 function SpeakerDetails() {
 
@@ -25,6 +27,7 @@ function SpeakerDetails() {
   const [speaker, setSpeaker] = useState(null);
 
   const [loading, setLoading] = useState(true);
+  const SERVER_URL = API_BASE_URL.replace("/api", "");
 
   useEffect(() => {
 
@@ -123,7 +126,7 @@ function SpeakerDetails() {
         <Avatar
           src={
             speaker.image
-              ? `http://localhost:5000${speaker.image}`
+              ? `${SERVER_URL}${speaker.image}`
               : ""
           }
           alt={speaker.name}

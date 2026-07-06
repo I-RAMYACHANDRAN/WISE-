@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import { API_BASE_URL } from "../config/api";
 import {
   Box,
   Button,
@@ -35,6 +35,8 @@ import {
 function ManageVenueMap() {
 
   const [venueMap, setVenueMap] = useState(null);
+
+  const SERVER_URL = API_BASE_URL.replace("/api", "");
 
   const [loading, setLoading] = useState(true);
 
@@ -126,7 +128,8 @@ function ManageVenueMap() {
 
       setImageForm((prev) => ({
         ...prev,
-        image: `http://localhost:5000${response.image}`,
+        
+          image: `${SERVER_URL}${response.image}`,
       }));
 
     } catch (err) {

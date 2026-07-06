@@ -1,7 +1,6 @@
 import axios from "axios";
-
-const API =
-  "http://localhost:5000/api/gallery";
+import { API_BASE_URL } from "../config/api";
+const API =API_BASE_URL;
 
 // =======================
 // Get Gallery

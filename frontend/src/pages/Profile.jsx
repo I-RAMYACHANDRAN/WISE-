@@ -22,7 +22,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import BusinessIcon from "@mui/icons-material/Business";
 import WorkIcon from "@mui/icons-material/Work";
-
+import { API_BASE_URL } from "../config/api";
 import {
   getProfile,
   updateProfile,
@@ -80,6 +80,8 @@ function InfoCard({ icon, title, value }) {
 }
 
 function Profile() {
+
+  const SERVER_URL = API_BASE_URL.replace("/api", "");
 
   const [user, setUser] = useState(null);
 
@@ -219,7 +221,7 @@ function Profile() {
         <Avatar
           src={
             user.profileImage
-            ? `http://localhost:5000/${user.profileImage}`
+             ? `${SERVER_URL}/${user.profileImage}`
             : ""
           }
           sx={{

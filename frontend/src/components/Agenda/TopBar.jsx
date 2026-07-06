@@ -17,6 +17,9 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { useNavigate } from "react-router-dom";
 
 import { getProfile } from "../services/authService";
+import { API_BASE_URL } from "../config/api";
+
+const BASE_URL = API_BASE_URL.replace("/api", "");
 
 
 function TopBar({
@@ -170,7 +173,7 @@ function TopBar({
         <Avatar
           src={
             user?.profileImage
-              ? `http://localhost:5000/${user.profileImage}`
+              ? `${BASE_URL}/${user.profileImage}`
               : ""
           }
           sx={{

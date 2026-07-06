@@ -19,6 +19,9 @@ import {
   addGalleryImage,
   deleteGalleryImage,
 } from "../services/galleryService";
+import { API_BASE_URL } from "../config/api";
+
+
 
 function ManageGallery() {
 
@@ -29,6 +32,7 @@ function ManageGallery() {
   const [image, setImage] = useState("");
 
   const [caption, setCaption] = useState("");
+  const SERVER_URL  = API_BASE_URL.replace("/api", "");
 
   useEffect(() => {
 
@@ -72,7 +76,7 @@ function ManageGallery() {
         await uploadImage(file);
 
       setImage(
-        `http://localhost:5000${response.image}`
+        `${SERVER_URL}${response.image}`
       );
 
     } catch (error) {
