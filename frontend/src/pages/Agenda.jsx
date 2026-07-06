@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 
 import TopBar from "../components/TopBar";
-import TimelineItem from "../components/agenda/TimelineItem";
+import TimelineItem from "../components/Agenda/TimelineItem";
 
 import { getSessions } from "../services/sessionService";
 
