@@ -1,4 +1,5 @@
 const multer = require("multer");
+const path = require("path");
 
 const storage = multer.diskStorage({
 
@@ -25,27 +26,30 @@ const storage = multer.diskStorage({
 
 });
 
+
+
 const fileFilter = (req, file, cb) => {
 
-    if (file.mimetype.startsWith("image/")) {
+const allowedExtensions = [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".jfif",
+        ".webp"
+    ];
 
+    const extension = path.extname(file.originalname).toLowerCase();
+
+    if (
+        file.mimetype.startsWith("image/") ||
+        allowedExtensions.includes(extension)
+    ) {
         cb(null, true);
-
     } else {
-
         cb(
-            new Error("Only images allowed."),
+            new Error("Only image files are allowed."),
             false
         );
-
     }
 
 };
-
-module.exports = multer({
-
-    storage,
-
-    fileFilter,
-
-});
