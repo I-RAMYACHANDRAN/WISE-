@@ -22,7 +22,6 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import {
   Link,
   useLocation,
-  useNavigate,
 } from "react-router-dom";
 
 import wiseLogo from "../assets/images/wise-logo.png";
@@ -63,21 +62,19 @@ const menuItems = [
     icon: <CollectionsIcon />,
     path: "/gallery",
   },
-
   {
     text: "Profile",
     icon: <PersonIcon />,
     path: "/profile",
   },
   {
-  text: "Help & Support",
-  icon: <SupportAgentIcon />,
-  path: "/help-support",
-},
+    text: "Help & Support",
+    icon: <SupportAgentIcon />,
+    path: "/help-support",
+  },
 ];
-const handleLogout = () => {
 
-  alert("Logout clicked");
+const handleLogout = () => {
 
   localStorage.removeItem("attendeeUser");
 
@@ -85,25 +82,25 @@ const handleLogout = () => {
 
 };
 
-function Navbar() {
+function Navbar({ closeDrawer }) {
+
   const location = useLocation();
-  const navigate = useNavigate();
 
   return (
+
     <Box
       sx={{
         width: 280,
         height: "100vh",
+        overflowY: "auto",
         bgcolor: "#FFFFFF",
         borderRight: "1px solid #ECECEC",
         display: "flex",
         flexDirection: "column",
-        position: "fixed",
-        left: 0,
-        top: 0,
       }}
     >
-      {/* Logo Section */}
+
+      {/* Logo */}
 
       <Box
         sx={{
@@ -114,6 +111,7 @@ function Navbar() {
           py: 3,
         }}
       >
+
         <Box
           component="img"
           src={wiseLogo}
@@ -126,6 +124,7 @@ function Navbar() {
         />
 
         <Box>
+
           <Typography
             variant="h6"
             fontWeight={700}
@@ -143,12 +142,14 @@ function Navbar() {
             <br />
             Engineering
           </Typography>
+
         </Box>
+
       </Box>
 
       <Divider />
 
-      {/* Navigation */}
+      {/* Menu */}
 
       <List
         sx={{
@@ -157,11 +158,14 @@ function Navbar() {
           flex: 1,
         }}
       >
+
         {menuItems.map((item) => (
+
           <ListItemButton
             key={item.text}
             component={Link}
             to={item.path}
+            onClick={() => closeDrawer?.()}
             selected={location.pathname === item.path}
             sx={{
               mb: 1,
@@ -182,6 +186,7 @@ function Navbar() {
               },
             }}
           >
+
             <ListItemIcon
               sx={{
                 minWidth: 40,
@@ -199,8 +204,11 @@ function Navbar() {
                     : 500,
               }}
             />
+
           </ListItemButton>
+
         ))}
+
       </List>
 
       <Divider />
@@ -208,28 +216,40 @@ function Navbar() {
       {/* Logout */}
 
       <List sx={{ p: 2 }}>
-      <ListItemButton
-        onClick={handleLogout}
-        sx={{
-          borderRadius: 3,
 
-          "&:hover": {
-            bgcolor: "#FFF2F2",
-          },
-        }}
-      >
-        <ListItemIcon>
-          <LogoutIcon />
-        </ListItemIcon>
+        <ListItemButton
+          onClick={() => {
 
-        <ListItemText
-          primary="Logout"
-        />
+            handleLogout();
 
-      </ListItemButton>
-    </List>
+            closeDrawer?.();
+
+          }}
+          sx={{
+            borderRadius: 3,
+
+            "&:hover": {
+              bgcolor: "#FFF2F2",
+            },
+          }}
+        >
+
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+
+          <ListItemText
+            primary="Logout"
+          />
+
+        </ListItemButton>
+
+      </List>
+
     </Box>
+
   );
+
 }
 
 export default Navbar;
