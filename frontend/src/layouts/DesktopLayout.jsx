@@ -1,31 +1,52 @@
-import { Box, Container } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import {
+  Box,
+} from "@mui/material";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import DesktopNavbar from "../components/DesktopNavbar";
+import TopBar from "../components/TopBar";
 
-function DesktopLayout() {
+const drawerWidth = 280;
+
+function DesktopLayout({
+  title,
+  subtitle,
+  children,
+}) {
+
   return (
+
     <Box
       sx={{
+        display: "flex",
         minHeight: "100vh",
-        bgcolor: "#F5F6FA",
+        bgcolor: "#F7F8FC",
       }}
     >
-      <Navbar />
 
-      <Container
-        maxWidth="xl"
+      <DesktopNavbar />
+
+      <Box
+        component="main"
         sx={{
-          py: 4,
+          flexGrow: 1,
+          ml: `${drawerWidth}px`,
+          p: 4,
         }}
       >
-        <Outlet />
-      </Container>
 
-      <Footer />
+        <TopBar
+          title={title}
+          subtitle={subtitle}
+        />
+
+        {children}
+
+      </Box>
+
     </Box>
+
   );
+
 }
 
 export default DesktopLayout;

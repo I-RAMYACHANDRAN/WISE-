@@ -1,31 +1,83 @@
-import { Box } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import { useState } from "react";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import {
+  Box,
+  Drawer,
+  IconButton,
+} from "@mui/material";
 
-function MobileLayout() {
+import MenuIcon from "@mui/icons-material/Menu";
+
+import MobileNavbar from "../components/MobileNavbar";
+import TopBar from "../components/TopBar";
+
+function MobileLayout({
+  title,
+  subtitle,
+  children,
+}) {
+
+  const [mobileOpen, setMobileOpen] =
+    useState(false);
+
   return (
+
     <Box
       sx={{
+        display: "flex",
         minHeight: "100vh",
         bgcolor: "#F7F8FC",
       }}
     >
-      <Navbar />
 
-      <Box
-        sx={{
-          px: 2,
-          py: 3,
+      <Drawer
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        ModalProps={{
+          keepMounted: true,
         }}
       >
-        <Outlet />
+
+        <MobileNavbar
+          closeDrawer={() =>
+            setMobileOpen(false)
+          }
+        />
+
+      </Drawer>
+
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 2,
+        }}
+      >
+
+        <IconButton
+          onClick={() =>
+            setMobileOpen(true)
+          }
+          sx={{ mb: 2 }}
+        >
+
+          <MenuIcon />
+
+        </IconButton>
+
+        <TopBar
+          title={title}
+          subtitle={subtitle}
+        />
+
+        {children}
+
       </Box>
 
-      <Footer />
     </Box>
+
   );
+
 }
 
 export default MobileLayout;
