@@ -4,33 +4,24 @@ const path = require("path");
 const storage = multer.diskStorage({
 
     destination(req, file, cb) {
-
         cb(null, "uploads/");
-
     },
 
     filename(req, file, cb) {
 
-        const extension =
-            file.originalname.split(".").pop();
+        const extension = file.originalname.split(".").pop();
 
         cb(
             null,
-            "profile-" +
-            Date.now() +
-            "." +
-            extension
+            "profile-" + Date.now() + "." + extension
         );
-
     },
 
 });
 
-
-
 const fileFilter = (req, file, cb) => {
 
-const allowedExtensions = [
+    const allowedExtensions = [
         ".jpg",
         ".jpeg",
         ".png",
@@ -53,3 +44,10 @@ const allowedExtensions = [
     }
 
 };
+
+const upload = multer({
+    storage,
+    fileFilter,
+});
+
+module.exports = upload;
